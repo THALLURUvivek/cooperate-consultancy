@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | Stackly Consulting</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>◆</text></svg>">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 60%, rgba(201,168,76,0.03) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    .error-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .error-shape {
+      position: absolute;
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 50%;
+    }
+
+    .error-shape-1 {
+      width: 500px;
+      height: 500px;
+      top: -150px;
+      left: -100px;
+      animation: rotate-slow 50s linear infinite;
+    }
+
+    .error-shape-2 {
+      width: 350px;
+      height: 350px;
+      bottom: -100px;
+      right: -80px;
+      animation: rotate-slow 40s linear infinite reverse;
+    }
+
+    .error-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 12rem;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      position: relative;
+      animation: error-float 6s ease-in-out infinite;
+    }
+
+    @keyframes error-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    .error-code-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 100px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.08), transparent);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .error-divider {
+      width: 80px;
+      height: 2px;
+      background: var(--gold-gradient);
+      margin: 8px auto 32px;
+      border-radius: 2px;
+    }
+
+    .error-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .error-desc {
+      color: rgba(255,255,255,0.5);
+      font-size: 1.05rem;
+      max-width: 440px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .error-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .error-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .error-particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.1; }
+      90% { opacity: 0.1; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+
+    .error-content {
+      animation: errorFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes errorFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .error-code { font-size: 7rem; }
+      .error-title { font-size: 1.5rem; }
+      .error-desc { font-size: 0.95rem; }
+      .error-buttons { flex-direction: column; align-items: center; }
+      .error-buttons .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="noise-overlay"></div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <div class="error-page">
+    <div class="error-gradient"></div>
+
+    <div class="error-shapes">
+      <div class="error-shape error-shape-1"></div>
+      <div class="error-shape error-shape-2"></div>
+    </div>
+
+    <div class="error-particles" id="errorParticles"></div>
+
+    <div class="error-content">
+      <div class="error-code">
+        <div class="error-code-glow"></div>
+        404
+      </div>
+      <div class="error-divider"></div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-desc">
+        The page you're looking for doesn't exist or has been moved.
+        Let us guide you back.
+      </p>
+      <div class="error-buttons">
+        <a href="index.html" class="btn btn-primary">Back to Home &rarr;</a>
+        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Particles
+    const container = document.getElementById('errorParticles');
+    if (container) {
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'error-particle';
+        const s = Math.random() * 3 + 1;
+        p.style.width = s + 'px';
+        p.style.height = s + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+        p.style.animationDelay = (Math.random() * 20) + 's';
+        container.appendChild(p);
+      }
+    }
+  </script>
+</body>
+</html>

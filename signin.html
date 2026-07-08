@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Stackly Consulting Group</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>◆</text></svg>">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      background: var(--navy);
+    }
+
+    .auth-brand {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px;
+    }
+
+    .auth-brand-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 60%, rgba(201,168,76,0.04) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    .auth-brand-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .auth-brand-shape {
+      position: absolute;
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 50%;
+    }
+
+    .auth-brand-shape-1 {
+      width: 500px;
+      height: 500px;
+      top: -200px;
+      right: -100px;
+      animation: rotate-slow 50s linear infinite;
+    }
+
+    .auth-brand-shape-2 {
+      width: 300px;
+      height: 300px;
+      bottom: -100px;
+      left: -80px;
+      animation: rotate-slow 40s linear infinite reverse;
+    }
+
+    .auth-brand-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 420px;
+    }
+
+    .auth-brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.5px;
+    }
+
+    .auth-brand-logo span {
+      font-size: 0.7rem;
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      -webkit-text-fill-color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+    }
+
+    .auth-brand-quote {
+      margin-top: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .auth-brand-quote cite {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .auth-brand-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .auth-brand-stat {
+      text-align: center;
+    }
+
+    .auth-brand-stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .auth-brand-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .auth-form-wrapper {
+      width: 480px;
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      position: relative;
+    }
+
+    .auth-form-container {
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .auth-form-header {
+      margin-bottom: 40px;
+    }
+
+    .auth-form-header h1 {
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .auth-form-header p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .auth-form-header p a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .auth-form-header p a:hover {
+      color: var(--gold-dark);
+    }
+
+    .auth-form .form-group {
+      margin-bottom: 22px;
+    }
+
+    .auth-form .form-group label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .auth-form .form-group label a {
+      font-weight: 500;
+      color: var(--gray);
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.82rem;
+    }
+
+    .auth-form .form-group label a:hover {
+      color: var(--gold);
+    }
+
+    .auth-form .form-group input {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid transparent;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .auth-form .form-group input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 6px rgba(201,168,76,0.08);
+    }
+
+    .auth-form .form-group input::placeholder {
+      color: var(--gray-light);
+    }
+
+    .auth-form .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .auth-form .form-options label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--gray);
+      cursor: pointer;
+    }
+
+    .auth-form .form-options input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .auth-form .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 18px 40px;
+      font-size: 0.95rem;
+    }
+
+    .auth-form .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .auth-form .btn-primary:disabled:hover {
+      transform: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0;
+      color: var(--gray-light);
+      font-size: 0.8rem;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .auth-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .auth-social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid rgba(0,0,0,0.06);
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .auth-social-btn:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    .auth-form-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.88rem;
+      color: var(--gray);
+    }
+
+    .auth-form-footer a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .auth-form-footer a:hover {
+      color: var(--gold-dark);
+    }
+
+    @media (max-width: 1024px) {
+      .auth-brand { display: none; }
+      .auth-form-wrapper {
+        width: 100%;
+        padding: 40px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .auth-form-wrapper { padding: 32px 20px; }
+      .auth-form-header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="noise-overlay"></div>
+
+  <div class="auth-page">
+    <!-- Brand Side -->
+    <div class="auth-brand">
+      <div class="auth-brand-bg"></div>
+      <div class="auth-brand-shapes">
+        <div class="auth-brand-shape auth-brand-shape-1"></div>
+        <div class="auth-brand-shape auth-brand-shape-2"></div>
+      </div>
+      <div class="auth-brand-content">
+        <div class="auth-brand-logo">
+          <img src="images/image.png" alt="Stackly" height="40">
+          <span>Consulting Group</span>
+        </div>
+        <div class="auth-brand-quote">
+          &ldquo;Empowering visionary leaders with strategic insights that drive sustainable business growth.&rdquo;
+          <cite>— Alexander Reed, CEO &amp; Founder</cite>
+        </div>
+        <div class="auth-brand-stats">
+          <div class="auth-brand-stat">
+            <div class="auth-brand-stat-number">150+</div>
+            <div class="auth-brand-stat-label">Enterprises</div>
+          </div>
+          <div class="auth-brand-stat">
+            <div class="auth-brand-stat-number">97%</div>
+            <div class="auth-brand-stat-label">Retention</div>
+          </div>
+          <div class="auth-brand-stat">
+            <div class="auth-brand-stat-number">25+</div>
+            <div class="auth-brand-stat-label">Years</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Side -->
+    <div class="auth-form-wrapper">
+      <div class="auth-form-container">
+        <div class="auth-form-header">
+          <h1>Welcome back</h1>
+          <p>Sign in to your portal &middot; <a href="signup.html">Create an account</a></p>
+        </div>
+
+        <form class="auth-form" id="signinForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password">
+              Password
+              <a href="#">Forgot?</a>
+            </label>
+            <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+
+          <div class="form-group">
+            <label for="signinRole">I am a</label>
+            <select id="signinRole" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="admin">Administrator</option>
+              <option value="consultant">Consultant</option>
+              <option value="client">Client</option>
+            </select>
+          </div>
+
+          <div class="form-options">
+            <label>
+              <input type="checkbox" checked>
+              Remember me
+            </label>
+          </div>
+
+          <div class="form-error" id="signinError" style="display:none;color:#ef4444;font-size:0.875rem;margin-bottom:1rem;text-align:center;"></div>
+
+          <button type="submit" class="btn btn-primary" id="signinBtn">
+            Sign In &rarr;
+          </button>
+        </form>
+
+        <div class="auth-divider">or continue with</div>
+
+        <div class="auth-social">
+          <button class="auth-social-btn">Google</button>
+          <button class="auth-social-btn">Microsoft</button>
+          <button class="auth-social-btn">LinkedIn</button>
+        </div>
+
+        <div class="auth-form-footer">
+          Don't have an account? <a href="signup.html">Create one now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pre-fill email and role if user just signed up
+    const storedUser = localStorage.getItem('stackly_user');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        if (user.email) {
+          document.getElementById('email').value = user.email;
+        }
+        if (user.role) {
+          document.getElementById('signinRole').value = user.role;
+        }
+      } catch(e) {}
+    }
+
+    document.getElementById('signinForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email')?.value.trim();
+      const password = document.getElementById('password')?.value.trim();
+      const role = document.getElementById('signinRole')?.value;
+      const btn = document.getElementById('signinBtn');
+      const errorMsg = document.getElementById('signinError');
+
+      if (!email || !password || !role) {
+        btn.style.animation = 'shake 0.5s ease';
+        setTimeout(() => { btn.style.animation = ''; }, 500);
+        return;
+      }
+
+      btn.innerHTML = 'Signing In...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        const stored = localStorage.getItem('stackly_user');
+        if (stored) {
+          try {
+            const user = JSON.parse(stored);
+            if (email === user.email && password === user.password && role === user.role) {
+              const dashboards = {
+                admin: 'admin-dashboard.html',
+                consultant: 'consultant-dashboard.html',
+                client: 'client-dashboard.html'
+              };
+              window.location.href = dashboards[role] || 'admin-dashboard.html';
+              return;
+            }
+          } catch(e) {}
+        }
+
+        // Invalid credentials
+        btn.innerHTML = 'Sign In &rarr;';
+        btn.disabled = false;
+        if (errorMsg) {
+          errorMsg.textContent = 'Invalid email, password, or role. Please try again.';
+          errorMsg.style.display = 'block';
+        }
+        btn.style.animation = 'shake 0.5s ease';
+        setTimeout(() => { btn.style.animation = ''; }, 500);
+      }, 1000);
+    });
+
+    // Inject shake keyframes if not present
+    if (!document.getElementById('shake-style')) {
+      const style = document.createElement('style');
+      style.id = 'shake-style';
+      style.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  </script>
+
+</body>
+</html>

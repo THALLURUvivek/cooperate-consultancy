@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultant Dashboard — Stackly Consulting Group</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>◇</text></svg>">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html" class="sidebar-logo">
+          <img src="images/image.png" alt="Stackly" height="40">
+          <span>Consulting Group</span>
+        </a>
+      </div>
+      <div class="sidebar-user">
+        <div class="sidebar-avatar">VM</div>
+        <div class="sidebar-user-info">
+          <h4>Victoria Morgan</h4>
+          <span>victoria@stackly.com</span>
+          <span class="sidebar-role-badge consultant">Consultant</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-label">Workspace</div>
+        <a href="consultant-dashboard.html" class="sidebar-nav-item active">
+          <span class="sidebar-nav-icon">◆</span>
+          Dashboard
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◈</span>
+          My Clients
+          <span class="sidebar-nav-badge gold">8</span>
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◇</span>
+          Tasks
+          <span class="sidebar-nav-badge">5</span>
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">○</span>
+          Calendar
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◉</span>
+          Messages
+          <span class="sidebar-nav-badge">3</span>
+        </a>
+        <div class="sidebar-nav-label">Reports</div>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">□</span>
+          Performance
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">△</span>
+          Timesheets
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">☆</span>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">←</span>
+          Back to Website
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+          <div class="topbar-search">
+            <span class="topbar-search-icon">⌕</span>
+            <input type="text" placeholder="Search clients, tasks...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="topbar-btn">
+            <span>○</span>
+            <span class="notification-dot"></span>
+          </button>
+          <button class="topbar-btn">
+            <span>⚙</span>
+          </button>
+          <div class="topbar-profile">
+            <div class="topbar-profile-avatar">VM</div>
+            <span class="topbar-profile-name">Victoria</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <div class="page-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <h1>Consultant Dashboard</h1>
+              <p>Good morning, Victoria. You have <strong style="color:var(--navy);">5 pending tasks</strong> and <strong style="color:var(--navy);">3 meetings</strong> today.</p>
+            </div>
+            <div class="page-header-actions">
+              <span class="live-indicator">
+                <span class="live-dot"></span>
+                <span class="realtime-clock">Loading...</span>
+              </span>
+              <a href="#" class="btn-dash btn-dash-primary btn-dash-sm">+ New Task</a>
+              <a href="#" class="btn-dash btn-dash-outline btn-dash-sm">Schedule Meeting</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid" data-counter-section>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon gold">◈</div>
+              <span class="live-indicator"><span class="live-dot"></span> Live</span>
+            </div>
+            <div class="stats-card-label">Active Clients</div>
+            <div class="stats-card-value" data-count-to="8">0</div>
+            <div class="stats-card-change up">↑ 2 this quarter</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon blue">◇</div>
+            </div>
+            <div class="stats-card-label">Billable Hours</div>
+            <div class="stats-card-value" id="liveBillable" data-base="127" data-variance="5">127</div>
+            <div class="stats-card-change up">↑ 14% vs last month</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon green">◆</div>
+            </div>
+            <div class="stats-card-label">Revenue Generated</div>
+            <div class="stats-card-value">$187.4K</div>
+            <div class="stats-card-change up">↑ 8.7% vs Q2</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon purple">○</div>
+            </div>
+            <div class="stats-card-label">Client Satisfaction</div>
+            <div class="stats-card-value" data-count-to="96">0<small style="font-size:1rem;font-family:Inter">%</small></div>
+            <div class="stats-card-change up">↑ 1.2% this year</div>
+          </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid-sidebar">
+          <!-- Left: My Clients & Tasks -->
+          <div>
+            <!-- My Clients -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-header">
+                <h3>My Clients</h3>
+                <div class="card-header-actions">
+                  <a href="#" class="btn-dash btn-dash-ghost btn-dash-sm">View All</a>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:12px;">
+                <div class="client-card" style="margin-bottom:8px;">
+                  <div class="client-card-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">AC</div>
+                  <div class="client-card-info">
+                    <h4>Acme Corporation</h4>
+                    <p>Digital Transformation — <span class="badge badge-success" style="font-size:0.65rem;">Active</span></p>
+                  </div>
+                  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--gray);">85%</span>
+                  <div style="width:60px;"><div class="progress-bar"><div class="progress-fill" style="width:85%;"></div></div></div>
+                </div>
+                <div class="client-card" style="margin-bottom:8px;">
+                  <div class="client-card-avatar" style="background:linear-gradient(135deg,#10b981,#059669);">MP</div>
+                  <div class="client-card-info">
+                    <h4>Meridian Partners</h4>
+                    <p>M&amp;A Advisory — <span class="badge badge-success" style="font-size:0.65rem;">Active</span></p>
+                  </div>
+                  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--gray);">62%</span>
+                  <div style="width:60px;"><div class="progress-bar"><div class="progress-fill blue" style="width:62%;"></div></div></div>
+                </div>
+                <div class="client-card" style="margin-bottom:8px;">
+                  <div class="client-card-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706);">PV</div>
+                  <div class="client-card-info">
+                    <h4>Pinnacle Ventures</h4>
+                    <p>Strategic Planning — <span class="badge badge-warning" style="font-size:0.65rem;">On Hold</span></p>
+                  </div>
+                  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--gray);">40%</span>
+                  <div style="width:60px;"><div class="progress-bar"><div class="progress-fill" style="width:40%;"></div></div></div>
+                </div>
+                <div class="client-card">
+                  <div class="client-card-avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">GS</div>
+                  <div class="client-card-info">
+                    <h4>Global Solutions Inc.</h4>
+                    <p>Risk Management — <span class="badge badge-success" style="font-size:0.65rem;">Active</span></p>
+                  </div>
+                  <span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--gray);">28%</span>
+                  <div style="width:60px;"><div class="progress-bar"><div class="progress-fill green" style="width:28%;"></div></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Tasks -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Pending Tasks</h3>
+                <div class="card-header-actions">
+                  <span class="badge badge-gold">5 remaining</span>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="task-item">
+                  <div class="task-check"></div>
+                  <div class="task-content">
+                    <h4>Draft Q3 Strategic Proposal — Acme Corp</h4>
+                    <p>Due today at 5:00 PM</p>
+                  </div>
+                  <div class="task-priority high"></div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check"></div>
+                  <div class="task-content">
+                    <h4>Review M&A Due Diligence Report</h4>
+                    <p>Due tomorrow at 12:00 PM</p>
+                  </div>
+                  <div class="task-priority high"></div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check done">✓</div>
+                  <div class="task-content">
+                    <h4>Client Presentation — Meridian Partners</h4>
+                    <p>Completed yesterday</p>
+                  </div>
+                  <div class="task-priority medium"></div>
+                </div>
+                <div class="task-item">
+                  <div class="task-check"></div>
+                  <div class="task-content">
+                    <h4>Update Risk Matrix — Global Solutions</h4>
+                    <p>Due in 3 days</p>
+                  </div>
+                  <div class="task-priority low"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Calendar & Messages -->
+          <div>
+            <!-- Upcoming Calendar -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-header">
+                <h3>Today's Schedule</h3>
+                <div class="card-header-actions">
+                  <a href="#" class="btn-dash btn-dash-ghost btn-dash-sm">+ Add</a>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="day">10</span>
+                    <span class="month">Jul</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>Client Strategy Review — Acme Corp</h4>
+                    <p>10:00 AM — 11:30 AM · Virtual</p>
+                  </div>
+                  <span class="status-online" style="flex-shrink:0;"></span>
+                </div>
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="day">10</span>
+                    <span class="month">Jul</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>Team Standup — Q3 Planning</h4>
+                    <p>1:00 PM — 1:30 PM · Conference Room A</p>
+                  </div>
+                </div>
+                <div class="event-item">
+                  <div class="event-date">
+                    <span class="day">10</span>
+                    <span class="month">Jul</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>M&A Document Review — Meridian</h4>
+                    <p>3:00 PM — 4:00 PM · Virtual</p>
+                  </div>
+                </div>
+                <div class="event-item">
+                  <div class="event-date" style="background:rgba(16,185,129,0.06);">
+                    <span class="day" style="color:var(--success);">11</span>
+                    <span class="month">Jul</span>
+                  </div>
+                  <div class="event-info">
+                    <h4>Global Solutions — Risk Workshop</h4>
+                    <p>9:00 AM — 12:00 PM · On-site</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Messages -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Recent Messages</h3>
+                <div class="card-header-actions">
+                  <span class="badge badge-gold">3 unread</span>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">JD</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>James Donaldson</h4>
+                      <span class="message-time">5 min ago</span>
+                    </div>
+                    <div class="message-preview">Hi Victoria, could you share the latest projections for...</div>
+                  </div>
+                  <div class="unread-dot"></div>
+                </div>
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#10b981,#059669);">AC</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>Alice Chen — Acme Corp</h4>
+                      <span class="message-time">2 hr ago</span>
+                    </div>
+                    <div class="message-preview">The board loved the presentation. Let's schedule follow-up for...</div>
+                  </div>
+                  <div class="unread-dot"></div>
+                </div>
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706);">MK</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>Michael Kors — Sterling Group</h4>
+                      <span class="message-time">Yesterday</span>
+                    </div>
+                    <div class="message-preview">We're ready to move forward with the engagement. Please send...</div>
+                  </div>
+                </div>
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">DW</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>David Watanabe</h4>
+                      <span class="message-time">Yesterday</span>
+                    </div>
+                    <div class="message-preview">Q3 numbers are looking strong. Let's connect on the risk assessment...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Chart -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Consultant Performance — Monthly Billable Hours</h3>
+            <div class="card-header-actions">
+              <span class="live-indicator"><span class="live-dot"></span> Live</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container" style="height:280px;">
+              <canvas id="performanceChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Performance Bar Chart
+      const perfCtx = document.getElementById('performanceChart')?.getContext('2d');
+      if (perfCtx) {
+        new Chart(perfCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+              label: 'Billable Hours',
+              data: [112, 118, 124, 130, 127, 135, 142],
+              backgroundColor: [
+                'rgba(201,168,76,0.6)',
+                'rgba(201,168,76,0.6)',
+                'rgba(201,168,76,0.6)',
+                'rgba(201,168,76,0.6)',
+                'rgba(201,168,76,0.6)',
+                'rgba(201,168,76,0.6)',
+                'rgba(16,185,129,0.8)'
+              ],
+              borderColor: [
+                '#c9a84c','#c9a84c','#c9a84c','#c9a84c','#c9a84c','#c9a84c','#10b981'
+              ],
+              borderWidth: 1,
+              borderRadius: 6,
+              barPercentage: 0.5
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(0,0,0,0.04)' },
+                ticks: { font: { size: 11, family: 'Inter' }, color: '#9ca3af' }
+              },
+              x: {
+                grid: { display: false },
+                ticks: { font: { size: 10, family: 'Inter' }, color: '#9ca3af' }
+              }
+            }
+          }
+        });
+      }
+
+      // Real-time billable hours update
+      const billableEl = document.getElementById('liveBillable');
+      if (billableEl) {
+        setInterval(() => {
+          const base = parseFloat(billableEl.getAttribute('data-base') || '127');
+          const variance = parseFloat(billableEl.getAttribute('data-variance') || '5');
+          const newVal = base + (Math.random() - 0.4) * variance;
+          billableEl.textContent = Math.round(newVal);
+        }, 6000);
+      }
+
+    });
+  </script>
+  <script>
+    // Load user from localStorage
+    (function() {
+      const stored = localStorage.getItem('stackly_user');
+      if (!stored) { window.location.href = 'signin.html'; return; }
+      let user;
+      try { user = JSON.parse(stored); } catch(e) { window.location.href = 'signin.html'; return; }
+      if (!user.firstName || !user.lastName) { window.location.href = 'signin.html'; return; }
+
+      const initials = (user.firstName[0] + user.lastName[0]).toUpperCase();
+      const fullName = user.firstName + ' ' + user.lastName;
+      const role = user.role || 'client';
+      const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
+
+      document.querySelector('.sidebar-avatar').textContent = initials;
+      document.querySelector('.sidebar-user-info h4').textContent = fullName;
+      const spans = document.querySelectorAll('.sidebar-user-info span');
+      if (spans[0]) spans[0].textContent = user.email;
+      const badge = document.querySelector('.sidebar-role-badge');
+      if (badge) { badge.textContent = roleLabel; badge.className = 'sidebar-role-badge ' + role; }
+
+      const headerP = document.querySelector('.page-header p');
+      if (headerP) headerP.innerHTML = headerP.innerHTML.replace(/Good morning, \w+\./i, 'Good morning, ' + user.firstName + '.');
+    })();
+  </script>
+
+</body>
+</html>

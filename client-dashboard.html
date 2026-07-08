@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Dashboard — Stackly Consulting Group</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>☆</text></svg>">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <a href="index.html" class="sidebar-logo">
+          <img src="images/image.png" alt="Stackly" height="40">
+          <span>Consulting Group</span>
+        </a>
+      </div>
+      <div class="sidebar-user">
+        <div class="sidebar-avatar">JR</div>
+        <div class="sidebar-user-info">
+          <h4>James Richardson</h4>
+          <span>james@meridiancap.com</span>
+          <span class="sidebar-role-badge client">Client</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-label">My Portal</div>
+        <a href="client-dashboard.html" class="sidebar-nav-item active">
+          <span class="sidebar-nav-icon">◆</span>
+          Overview
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◇</span>
+          My Projects
+          <span class="sidebar-nav-badge gold">3</span>
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">△</span>
+          Invoices
+          <span class="sidebar-nav-badge">1</span>
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◉</span>
+          Messages
+          <span class="sidebar-nav-badge">2</span>
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">○</span>
+          Documents
+        </a>
+        <div class="sidebar-nav-label">Account</div>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">☆</span>
+          Settings
+        </a>
+        <a href="#" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">◈</span>
+          Support
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" class="sidebar-nav-item">
+          <span class="sidebar-nav-icon">←</span>
+          Back to Website
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+          <div class="topbar-search">
+            <span class="topbar-search-icon">⌕</span>
+            <input type="text" placeholder="Search projects, invoices...">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="topbar-btn">
+            <span>◆</span>
+            <span class="notification-dot"></span>
+          </button>
+          <button class="topbar-btn">
+            <span>⚙</span>
+          </button>
+          <div class="topbar-profile">
+            <div class="topbar-profile-avatar">JR</div>
+            <span class="topbar-profile-name">James</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <div class="page-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <h1>Welcome, James</h1>
+              <p>Your strategic transformation with Stackly is on track. Here's your personalized overview.</p>
+            </div>
+            <div class="page-header-actions">
+              <span class="live-indicator">
+                <span class="live-dot"></span>
+                <span class="realtime-clock">Loading...</span>
+              </span>
+              <a href="#" class="btn-dash btn-dash-primary btn-dash-sm">Schedule Call</a>
+              <a href="#" class="btn-dash btn-dash-outline btn-dash-sm">Message Consultant</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid" data-counter-section>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon gold">◇</div>
+            </div>
+            <div class="stats-card-label">Active Engagements</div>
+            <div class="stats-card-value" data-count-to="3">0</div>
+            <div class="stats-card-change up">↑ 1 new this quarter</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon green">◆</div>
+              <span class="live-indicator"><span class="live-dot"></span> Live</span>
+            </div>
+            <div class="stats-card-label">Project Progress</div>
+            <div class="stats-card-value" id="liveProgress" data-base="67" data-variance="2">67%</div>
+            <div class="stats-card-change up">↑ 12% this month</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon blue">△</div>
+            </div>
+            <div class="stats-card-label">Outstanding Invoices</div>
+            <div class="stats-card-value">$48,200</div>
+            <div class="stats-card-change down">↓ 1 overdue</div>
+          </div>
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <div class="stats-card-icon purple">○</div>
+            </div>
+            <div class="stats-card-label">Team Meetings</div>
+            <div class="stats-card-value" data-count-to="12">0</div>
+            <div class="stats-card-change up">↑ 4 this month</div>
+          </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid-sidebar">
+          <!-- Left: Projects & Progress -->
+          <div>
+            <!-- My Projects -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-header">
+                <h3>My Projects</h3>
+                <div class="card-header-actions">
+                  <a href="#" class="btn-dash btn-dash-ghost btn-dash-sm">View All</a>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(0,0,0,0.03);">
+                  <div>
+                    <h4 style="font-family:Inter;font-weight:600;font-size:0.95rem;color:var(--navy);">Strategic Transformation — Phase 2</h4>
+                    <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Lead Consultant: Victoria Morgan</p>
+                  </div>
+                  <div style="text-align:right;">
+                    <span class="badge badge-success" style="font-size:0.7rem;">In Progress</span>
+                    <div style="margin-top:8px;width:120px;"><div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div></div>
+                    <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gray);margin-top:4px;display:block;">72% Complete</span>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(0,0,0,0.03);">
+                  <div>
+                    <h4 style="font-family:Inter;font-weight:600;font-size:0.95rem;color:var(--navy);">Operational Excellence Program</h4>
+                    <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Lead Consultant: David Watanabe</p>
+                  </div>
+                  <div style="text-align:right;">
+                    <span class="badge badge-gold" style="font-size:0.7rem;">On Track</span>
+                    <div style="margin-top:8px;width:120px;"><div class="progress-bar"><div class="progress-fill green" style="width:45%;"></div></div></div>
+                    <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gray);margin-top:4px;display:block;">45% Complete</span>
+                  </div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;">
+                  <div>
+                    <h4 style="font-family:Inter;font-weight:600;font-size:0.95rem;color:var(--navy);">M&A Target Assessment</h4>
+                    <p style="font-size:0.8rem;color:var(--gray);margin-top:4px;">Lead Consultant: Alexander Reed</p>
+                  </div>
+                  <div style="text-align:right;">
+                    <span class="badge badge-info" style="font-size:0.7rem;">Planning</span>
+                    <div style="margin-top:8px;width:120px;"><div class="progress-bar"><div class="progress-fill blue" style="width:15%;"></div></div></div>
+                    <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gray);margin-top:4px;display:block;">15% Complete</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Milestones Chart -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Project Milestone Progress</h3>
+                <div class="card-header-actions">
+                  <span class="live-indicator"><span class="live-dot"></span> Live</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-container">
+                  <canvas id="milestoneChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Invoices & Messages -->
+          <div>
+            <!-- Recent Invoices -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-header">
+                <h3>Recent Invoices</h3>
+                <div class="card-header-actions">
+                  <a href="#" class="btn-dash btn-dash-ghost btn-dash-sm">View All</a>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="invoice-item">
+                  <div class="invoice-info">
+                    <h4>Strategic Transformation — Phase 2</h4>
+                    <p>Invoice #INV-2026-0042 · Due Jul 20, 2026</p>
+                  </div>
+                  <div class="invoice-status">
+                    <div class="invoice-amount">$32,000</div>
+                    <span class="badge badge-warning" style="font-size:0.65rem;">Pending</span>
+                  </div>
+                </div>
+                <div class="invoice-item">
+                  <div class="invoice-info">
+                    <h4>Operational Excellence Program</h4>
+                    <p>Invoice #INV-2026-0038 · Paid Jul 1, 2026</p>
+                  </div>
+                  <div class="invoice-status">
+                    <div class="invoice-amount">$16,200</div>
+                    <span class="badge badge-success" style="font-size:0.65rem;">Paid</span>
+                  </div>
+                </div>
+                <div class="invoice-item">
+                  <div class="invoice-info">
+                    <h4>M&A Target Assessment — Retainer</h4>
+                    <p>Invoice #INV-2026-0035 · Paid Jun 15, 2026</p>
+                  </div>
+                  <div class="invoice-status">
+                    <div class="invoice-amount">$12,000</div>
+                    <span class="badge badge-success" style="font-size:0.65rem;">Paid</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="card" style="margin-bottom:24px;">
+              <div class="card-header">
+                <h3>Messages</h3>
+                <div class="card-header-actions">
+                  <span class="badge badge-gold">2 unread</span>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#10b981,#059669);">VM</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>Victoria Morgan</h4>
+                      <span class="message-time">1 hr ago</span>
+                    </div>
+                    <div class="message-preview">Great news, James! Phase 2 strategy has been approved by our team. Let's schedule a walkthrough...</div>
+                  </div>
+                  <div class="unread-dot"></div>
+                </div>
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">DW</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>David Watanabe</h4>
+                      <span class="message-time">Yesterday</span>
+                    </div>
+                    <div class="message-preview">Hi James, I've uploaded the operational excellence roadmap to your document portal. Please review at...</div>
+                  </div>
+                  <div class="unread-dot"></div>
+                </div>
+                <div class="message-item">
+                  <div class="message-avatar" style="background:linear-gradient(135deg,#c9a84c,#a8882e);">AR</div>
+                  <div class="message-content">
+                    <div class="message-header">
+                      <h4>Alexander Reed</h4>
+                      <span class="message-time">3 days ago</span>
+                    </div>
+                    <div class="message-preview">James, it was a pleasure meeting with the board. I'll send over the M&A assessment proposal by Friday...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Documents -->
+            <div class="card">
+              <div class="card-header">
+                <h3>Recent Documents</h3>
+                <div class="card-header-actions">
+                  <a href="#" class="btn-dash btn-dash-ghost btn-dash-sm">Browse</a>
+                </div>
+              </div>
+              <div class="card-body" style="padding-bottom:8px;">
+                <div class="activity-item" style="padding:10px 0;">
+                  <div class="activity-icon gold">□</div>
+                  <div class="activity-content">
+                    <div class="activity-text"><strong>Phase2_Strategy.pdf</strong></div>
+                    <div class="activity-time">2.4 MB · Uploaded 2 days ago</div>
+                  </div>
+                </div>
+                <div class="activity-item" style="padding:10px 0;">
+                  <div class="activity-icon blue">□</div>
+                  <div class="activity-content">
+                    <div class="activity-text"><strong>Ops_Excellence_Roadmap.pdf</strong></div>
+                    <div class="activity-time">1.8 MB · Uploaded yesterday</div>
+                  </div>
+                </div>
+                <div class="activity-item" style="padding:10px 0;">
+                  <div class="activity-icon green">□</div>
+                  <div class="activity-content">
+                    <div class="activity-text"><strong>Q3_Performance_Report.xlsx</strong></div>
+                    <div class="activity-time">856 KB · Uploaded 5 days ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Milestone Radar Chart
+      const milestoneCtx = document.getElementById('milestoneChart')?.getContext('2d');
+      if (milestoneCtx) {
+        new Chart(milestoneCtx, {
+          type: 'radar',
+          data: {
+            labels: ['Strategy', 'Operations', 'M&A', 'Risk Mgmt', 'Digital', 'Talent'],
+            datasets: [{
+              label: 'Current Progress',
+              data: [72, 45, 15, 38, 55, 28],
+              backgroundColor: 'rgba(201,168,76,0.15)',
+              borderColor: '#c9a84c',
+              borderWidth: 2,
+              pointBackgroundColor: '#c9a84c',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+              pointRadius: 5
+            }, {
+              label: 'Target',
+              data: [100, 100, 100, 100, 100, 100],
+              backgroundColor: 'rgba(59,130,246,0.05)',
+              borderColor: 'rgba(59,130,246,0.3)',
+              borderWidth: 1,
+              borderDash: [4, 4],
+              pointBackgroundColor: 'transparent',
+              pointBorderColor: 'transparent',
+              pointRadius: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  usePointStyle: true,
+                  padding: 16,
+                  font: { size: 11, family: 'Inter' },
+                  color: '#6b7280'
+                }
+              }
+            },
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: 'rgba(0,0,0,0.04)' },
+                angleLines: { color: 'rgba(0,0,0,0.04)' },
+                pointLabels: { font: { size: 11, family: 'Inter' }, color: '#4b5563' },
+                ticks: {
+                  font: { size: 9, family: 'Inter' },
+                  color: '#9ca3af',
+                  backdropColor: 'transparent',
+                  stepSize: 20
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Live project progress update
+      const progressEl = document.getElementById('liveProgress');
+      if (progressEl) {
+        setInterval(() => {
+          const base = parseFloat(progressEl.getAttribute('data-base') || '67');
+          const variance = parseFloat(progressEl.getAttribute('data-variance') || '2');
+          const newVal = base + (Math.random() - 0.3) * variance;
+          progressEl.textContent = Math.min(100, Math.max(0, Math.round(newVal))) + '%';
+        }, 7000);
+      }
+
+    });
+  </script>
+  <script>
+    // Load user from localStorage
+    (function() {
+      const stored = localStorage.getItem('stackly_user');
+      if (!stored) { window.location.href = 'signin.html'; return; }
+      let user;
+      try { user = JSON.parse(stored); } catch(e) { window.location.href = 'signin.html'; return; }
+      if (!user.firstName || !user.lastName) { window.location.href = 'signin.html'; return; }
+
+      const initials = (user.firstName[0] + user.lastName[0]).toUpperCase();
+      const fullName = user.firstName + ' ' + user.lastName;
+      const role = user.role || 'client';
+      const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
+
+      document.querySelector('.sidebar-avatar').textContent = initials;
+      document.querySelector('.sidebar-user-info h4').textContent = fullName;
+      const spans = document.querySelectorAll('.sidebar-user-info span');
+      if (spans[0]) spans[0].textContent = user.email;
+      const badge = document.querySelector('.sidebar-role-badge');
+      if (badge) { badge.textContent = roleLabel; badge.className = 'sidebar-role-badge ' + role; }
+
+      const headerH1 = document.querySelector('.page-header h1');
+      if (headerH1) headerH1.textContent = 'Welcome, ' + user.firstName;
+    })();
+  </script>
+
+</body>
+</html>
