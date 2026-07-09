@@ -10,6 +10,16 @@
 </head>
 <body>
 
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo"><img src="images/image.png" alt="Stackly" height="60"></div>
+      <div class="preloader-bar">
+        <div class="preloader-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="dashboard-layout">
 
     <!-- Sidebar Overlay (Mobile) -->
@@ -22,6 +32,7 @@
           <img src="images/image.png" alt="Stackly" height="40">
           <span>Consulting Group</span>
         </a>
+        <button class="sidebar-close" id="sidebarClose">✕</button>
       </div>
       <div class="sidebar-user">
         <div class="sidebar-avatar">AR</div>
@@ -74,6 +85,10 @@
         <a href="index.html" class="sidebar-nav-item">
           <span class="sidebar-nav-icon">←</span>
           Back to Website
+        </a>
+        <a href="#" class="sidebar-nav-item" id="signOutBtn">
+          <span class="sidebar-nav-icon">✕</span>
+          Sign Out
         </a>
       </div>
     </aside>
@@ -349,6 +364,18 @@
     </div>
   </div>
 
+  <noscript>
+    <style>#preloader { display: none !important; }</style>
+  </noscript>
+  <script>
+    setTimeout(function(){
+      var p = document.getElementById('preloader');
+      if (p && !p.classList.contains('hidden')) {
+        p.classList.add('hidden');
+        document.body.style.overflow = 'visible';
+      }
+    }, 3500);
+  </script>
   <script src="js/dashboard.js"></script>
   <script>
     // ===== ADMIN DASHBOARD CHARTS =====
@@ -462,8 +489,7 @@
     });
   </script>
   <script>
-    // Load user from localStorage
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       const stored = localStorage.getItem('stackly_user');
       if (!stored) { window.location.href = 'signin.html'; return; }
       let user;
@@ -475,16 +501,29 @@
       const role = user.role || 'client';
       const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
 
-      document.querySelector('.sidebar-avatar').textContent = initials;
-      document.querySelector('.sidebar-user-info h4').textContent = fullName;
-      const spans = document.querySelectorAll('.sidebar-user-info span');
-      if (spans[0]) spans[0].textContent = user.email;
-      const badge = document.querySelector('.sidebar-role-badge');
-      if (badge) { badge.textContent = roleLabel; badge.className = 'sidebar-role-badge ' + role; }
+      var sidebar = document.getElementById('sidebar');
+      if (sidebar) {
+        var avatar = sidebar.querySelector('.sidebar-avatar');
+        if (avatar) avatar.textContent = initials;
+        var info = sidebar.querySelector('.sidebar-user-info');
+        if (info) {
+          var nameEl = info.querySelector('h4');
+          if (nameEl) nameEl.textContent = fullName;
+          var spans = info.querySelectorAll('span');
+          if (spans[0]) spans[0].textContent = user.email;
+          var badge = info.querySelector('.sidebar-role-badge');
+          if (badge) { badge.textContent = roleLabel; badge.className = 'sidebar-role-badge ' + role; }
+        }
+      }
 
-      const headerP = document.querySelector('.page-header p');
+      var topbarAvatar = document.querySelector('.topbar-profile-avatar');
+      if (topbarAvatar) topbarAvatar.textContent = initials;
+      var topbarName = document.querySelector('.topbar-profile-name');
+      if (topbarName) topbarName.textContent = user.firstName;
+
+      var headerP = document.querySelector('.page-header p');
       if (headerP) headerP.textContent = 'Welcome back, ' + user.firstName + ". Here's what's happening at Stackly today.";
-    })();
+    });
   </script>
 
 </body>

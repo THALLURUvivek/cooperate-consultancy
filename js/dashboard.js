@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ===== SIDEBAR CLOSE BUTTON =====
+  const sidebarClose = document.getElementById('sidebarClose');
+  if (sidebarClose && sidebar) {
+    sidebarClose.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+    });
+  }
+
   // Close sidebar on nav link click (mobile)
   document.querySelectorAll('.sidebar-nav-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -199,5 +208,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // ===== PRELOADER: hide after animation =====
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+    }, 1600);
+  }
+
+  // ===== SIGN OUT =====
+  const signOutBtn = document.getElementById('signOutBtn');
+  if (signOutBtn) {
+    signOutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('stackly_user');
+      window.location.href = 'signin.html';
+    });
+  }
 
 });

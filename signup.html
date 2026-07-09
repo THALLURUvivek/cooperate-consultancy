@@ -297,24 +297,164 @@
       margin-top: 4px;
     }
 
+    .auth-back-home {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    }
+    .auth-back-home:hover {
+      color: var(--gold);
+      transform: translateX(-4px);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(201,168,76,0.2);
+    }
+
+    .auth-form .form-group input,
+    .auth-form .form-group select {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .auth-form .form-group input:focus,
+    .auth-form .form-group select:focus {
+      transform: translateY(-1px);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.12), 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .auth-form .form-group.error input,
+    .auth-form .form-group.error select {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 4px rgba(220,38,38,0.08);
+    }
+    .auth-form .form-group.success input,
+    .auth-form .form-group.success select {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 4px rgba(22,163,74,0.08);
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-primary:hover::after {
+      transform: translateX(100%);
+    }
+
+    .auth-form-header h1 {
+      position: relative;
+      display: inline-block;
+    }
+    .auth-form-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--gold-gradient);
+      border-radius: 2px;
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0;
+      color: var(--gray-light);
+      font-size: 0.8rem;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .auth-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .auth-social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid rgba(0,0,0,0.06);
+      background: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .auth-social-btn:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    .auth-social-btn[data-brand="google"] { background: #fff; border-color: #dadce0; font-weight: 700; background-image: linear-gradient(135deg,#4285f4 0%,#ea4335 33%,#fbbc05 66%,#34a853 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .auth-social-btn[data-brand="google"]:hover { border-color: #4285f4; box-shadow: 0 2px 8px rgba(66,133,244,0.15); }
+    .auth-social-btn[data-brand="microsoft"] { background: #fff; border-color: #dadce0; color: #e81123; font-weight: 700; }
+    .auth-social-btn[data-brand="microsoft"]:hover { border-color: #e81123; box-shadow: 0 2px 8px rgba(232,17,35,0.15); }
+    .auth-social-btn[data-brand="linkedin"] { background: #fff; border-color: #dadce0; color: #0a66c2; font-weight: 700; }
+    .auth-social-btn[data-brand="linkedin"]:hover { border-color: #0a66c2; box-shadow: 0 2px 8px rgba(10,102,194,0.15); }
+
     @media (max-width: 1024px) {
       .auth-brand { display: none; }
-      .auth-form-wrapper {
-        width: 100%;
-        padding: 40px 24px;
+      .auth-form-wrapper { width: 100%; padding: 86px 24px 40px; }
+      .auth-back-home {
+        color: var(--navy);
+        background: var(--white);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        backdrop-filter: none;
       }
+      .auth-back-home:hover { color: var(--gold); border-color: rgba(201,168,76,0.3); }
     }
 
     @media (max-width: 480px) {
-      .auth-form-wrapper { padding: 32px 20px; }
+      .auth-form-wrapper { padding: 72px 20px 32px; }
       .auth-form-header h1 { font-size: 1.6rem; }
       .auth-form .form-row { grid-template-columns: 1fr; }
+      .auth-back-home { top: 14px; left: 16px; font-size: 0.78rem; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
+
+  <a href="index.html" class="auth-back-home">&larr; Back to Home</a>
 
   <div class="auth-page">
     <!-- Brand Side -->
@@ -351,6 +491,16 @@
         </div>
 
         <form class="auth-form" id="signupForm">
+          <div class="form-group">
+            <label for="role">I am a</label>
+            <select id="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="admin">Administrator</option>
+              <option value="consultant">Consultant</option>
+              <option value="client">Client</option>
+            </select>
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label for="firstName">First Name</label>
@@ -365,16 +515,6 @@
           <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" placeholder="james@company.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="role">I am a</label>
-            <select id="role" required>
-              <option value="" disabled selected>Select your role</option>
-              <option value="admin">Administrator</option>
-              <option value="consultant">Consultant</option>
-              <option value="client">Client</option>
-            </select>
           </div>
 
           <div class="form-row">
@@ -398,6 +538,14 @@
           </button>
         </form>
 
+        <div class="auth-divider">or continue with</div>
+
+        <div class="auth-social">
+          <button class="auth-social-btn" data-brand="google" onclick="window.location.href='404.html'">Google</button>
+          <button class="auth-social-btn" data-brand="microsoft" onclick="window.location.href='404.html'">Microsoft</button>
+          <button class="auth-social-btn" data-brand="linkedin" onclick="window.location.href='404.html'">LinkedIn</button>
+        </div>
+
         <div class="auth-form-footer">
           By signing up, you agree to our <a href="#">Terms of Service</a>
         </div>
@@ -406,66 +554,129 @@
   </div>
 
   <script>
-    document.getElementById('signupForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('signupForm');
+      if (!form) return;
 
-      const firstName = document.getElementById('firstName')?.value.trim();
-      const lastName = document.getElementById('lastName')?.value.trim();
-      const email = document.getElementById('email')?.value.trim();
-      const role = document.getElementById('role')?.value;
-      const password = document.getElementById('password')?.value;
-      const confirmPassword = document.getElementById('confirmPassword')?.value;
-      const terms = document.getElementById('terms')?.checked;
-      const btn = document.getElementById('signupBtn');
+      var fields = [
+        { id: 'firstName', label: 'First name', placeholder: 'first name', required: true, min: 2 },
+        { id: 'lastName', label: 'Last name', placeholder: 'last name', required: true, min: 2 },
+        { id: 'email', label: 'Email address', placeholder: 'email address', required: true, type: 'email' },
+        { id: 'role', label: 'Role', placeholder: 'role', required: true, isSelect: true },
+        { id: 'password', label: 'Password', placeholder: 'password', required: true, min: 8 },
+        { id: 'confirmPassword', label: 'Confirm password', placeholder: 'confirm password', required: true, match: 'password' }
+      ];
 
-      // Validation
-      if (!firstName || !lastName || !email || !role || !password || !confirmPassword) {
-        btn.style.animation = 'shake 0.5s ease';
-        setTimeout(() => { btn.style.animation = ''; }, 500);
-        return;
-      }
+      fields.forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return;
+        var group = el.closest('.form-group');
+        if (!group) return;
+        var err = document.createElement('div');
+        err.className = 'error-message';
+        err.id = f.id + '-error';
+        group.appendChild(err);
+      });
 
-      if (password.length < 8) {
-        alert('Password must be at least 8 characters.');
-        return;
-      }
+      function validate(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return true;
+        var val = (el.value || '').trim();
+        var err = document.getElementById(f.id + '-error');
+        var group = el.closest('.form-group');
+        if (!group || !err) return true;
 
-      if (password !== confirmPassword) {
-        alert('Passwords do not match.');
-        return;
-      }
-
-      if (!terms) {
-        alert('Please agree to the Terms of Service.');
-        return;
-      }
-
-      btn.innerHTML = 'Creating Account...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        // Store user info in localStorage for signin
-        const userData = { firstName, lastName, email, role, password };
-        localStorage.setItem('stackly_user', JSON.stringify(userData));
-
-        // Redirect to signin page
-        window.location.href = 'signin.html';
-      }, 1500);
-    });
-
-    // Inject shake keyframes if not present
-    if (!document.getElementById('shake-style')) {
-      const style = document.createElement('style');
-      style.id = 'shake-style';
-      style.textContent = `
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        var msg = '';
+        if (f.required && !val) {
+          msg = 'Please enter your ' + f.placeholder;
+        } else if (f.isSelect && (!val || val === '')) {
+          msg = 'Please select your ' + f.placeholder;
+        } else if (f.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          msg = 'Please enter a valid email address (e.g. name@company.com)';
+        } else if (f.min && val.length > 0 && val.length < f.min && f.id === 'password') {
+          msg = 'Your password must be at least ' + f.min + ' characters';
+        } else if (f.min && val.length > 0 && val.length < f.min) {
+          msg = 'Please enter at least ' + f.min + ' characters for your ' + f.placeholder;
+        } else if (f.match) {
+          var matchEl = document.getElementById(f.match);
+          if (matchEl && matchEl.value !== val) msg = 'Passwords don\u2019t match. Please try again.';
         }
-      `;
-      document.head.appendChild(style);
-    }
+
+        if (msg) {
+          group.classList.add('error');
+          group.classList.remove('success');
+          err.textContent = msg;
+          return false;
+        } else if (val) {
+          group.classList.remove('error');
+          group.classList.add('success');
+          err.textContent = '';
+          return true;
+        } else {
+          group.classList.remove('error', 'success');
+          err.textContent = '';
+          return true;
+        }
+      }
+
+      fields.forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return;
+        el.addEventListener('input', function() { validate(f); });
+        el.addEventListener('blur', function() { validate(f); });
+        if (f.match) {
+          var matchEl = document.getElementById(f.match);
+          if (matchEl) {
+            matchEl.addEventListener('input', function() { validate(f); });
+          }
+        }
+      });
+
+      var terms = document.getElementById('terms');
+      function validateTerms() {
+        if (!terms) return true;
+        var tg = terms.closest('.form-terms');
+        if (terms.checked) {
+          if (tg) { tg.style.outline = '2px solid #16a34a'; tg.style.outlineOffset = '4px'; tg.style.borderRadius = '4px'; }
+          return true;
+        } else {
+          if (tg) { tg.style.outline = '2px solid #dc2626'; tg.style.outlineOffset = '4px'; tg.style.borderRadius = '4px'; }
+          return false;
+        }
+      }
+      if (terms) {
+        terms.addEventListener('change', validateTerms);
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var valid = true;
+        fields.forEach(function(f) { if (!validate(f)) valid = false; });
+        if (!validateTerms()) valid = false;
+
+        if (!valid) {
+          var firstErr = form.querySelector('.form-group.error input, .form-group.error select');
+          if (firstErr) firstErr.focus();
+          return;
+        }
+
+        var btn = document.getElementById('signupBtn');
+        var firstName = document.getElementById('firstName').value.trim();
+        var lastName = document.getElementById('lastName').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var role = document.getElementById('role').value;
+        var password = document.getElementById('password').value;
+
+        btn.innerHTML = 'Creating Account...';
+        btn.disabled = true;
+
+        setTimeout(function() {
+          var userData = { firstName: firstName, lastName: lastName, email: email, role: role, password: password };
+          localStorage.setItem('stackly_user', JSON.stringify(userData));
+          window.location.href = 'signin.html';
+        }, 1500);
+      });
+    });
   </script>
 
 </body>

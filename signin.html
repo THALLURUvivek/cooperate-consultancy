@@ -209,7 +209,8 @@
       color: var(--gold);
     }
 
-    .auth-form .form-group input {
+    .auth-form .form-group input,
+    .auth-form .form-group select {
       width: 100%;
       padding: 16px 20px;
       border: 2px solid transparent;
@@ -222,7 +223,17 @@
       outline: none;
     }
 
-    .auth-form .form-group input:focus {
+    .auth-form .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ca3af' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+    }
+
+    .auth-form .form-group input:focus,
+    .auth-form .form-group select:focus {
       border-color: var(--gold);
       box-shadow: 0 0 0 6px rgba(201,168,76,0.08);
     }
@@ -334,23 +345,117 @@
       color: var(--gold-dark);
     }
 
+    .auth-back-home {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    }
+    .auth-back-home:hover {
+      color: var(--gold);
+      transform: translateX(-4px);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(201,168,76,0.2);
+    }
+
+    .auth-form .form-group input,
+    .auth-form .form-group select {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .auth-form .form-group input:focus,
+    .auth-form .form-group select:focus {
+      transform: translateY(-1px);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.12), 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .auth-form .form-group.error input,
+    .auth-form .form-group.error select {
+      border-color: #dc2626;
+      box-shadow: 0 0 0 4px rgba(220,38,38,0.08);
+    }
+    .auth-form .form-group.success input,
+    .auth-form .form-group.success select {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 4px rgba(22,163,74,0.08);
+    }
+
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-primary:hover::after {
+      transform: translateX(100%);
+    }
+
+    .auth-form-header h1 {
+      position: relative;
+      display: inline-block;
+    }
+    .auth-form-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--gold-gradient);
+      border-radius: 2px;
+    }
+
+    .auth-social-btn[data-brand="google"] { background: #fff; border-color: #dadce0; font-weight: 700; background-image: linear-gradient(135deg,#4285f4 0%,#ea4335 33%,#fbbc05 66%,#34a853 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .auth-social-btn[data-brand="google"]:hover { border-color: #4285f4; box-shadow: 0 2px 8px rgba(66,133,244,0.15); }
+    .auth-social-btn[data-brand="microsoft"] { background: #fff; border-color: #dadce0; color: #e81123; font-weight: 700; }
+    .auth-social-btn[data-brand="microsoft"]:hover { border-color: #e81123; box-shadow: 0 2px 8px rgba(232,17,35,0.15); }
+    .auth-social-btn[data-brand="linkedin"] { background: #fff; border-color: #dadce0; color: #0a66c2; font-weight: 700; }
+    .auth-social-btn[data-brand="linkedin"]:hover { border-color: #0a66c2; box-shadow: 0 2px 8px rgba(10,102,194,0.15); }
+
     @media (max-width: 1024px) {
       .auth-brand { display: none; }
-      .auth-form-wrapper {
-        width: 100%;
-        padding: 40px 24px;
+      .auth-form-wrapper { width: 100%; padding: 86px 24px 40px; }
+      .auth-back-home {
+        color: var(--navy);
+        background: var(--white);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        backdrop-filter: none;
       }
+      .auth-back-home:hover { color: var(--gold); border-color: rgba(201,168,76,0.3); }
     }
 
     @media (max-width: 480px) {
-      .auth-form-wrapper { padding: 32px 20px; }
+      .auth-form-wrapper { padding: 72px 20px 32px; }
       .auth-form-header h1 { font-size: 1.6rem; }
+      .auth-back-home { top: 14px; left: 16px; font-size: 0.78rem; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
+
+  <a href="index.html" class="auth-back-home">&larr; Back to Home</a>
 
   <div class="auth-page">
     <!-- Brand Side -->
@@ -396,6 +501,16 @@
 
         <form class="auth-form" id="signinForm">
           <div class="form-group">
+            <label for="signinRole">I am a</label>
+            <select id="signinRole" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="admin">Administrator</option>
+              <option value="consultant">Consultant</option>
+              <option value="client">Client</option>
+            </select>
+          </div>
+
+          <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" id="email" placeholder="you@company.com" required autocomplete="email">
           </div>
@@ -406,16 +521,6 @@
               <a href="#">Forgot?</a>
             </label>
             <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
-          </div>
-
-          <div class="form-group">
-            <label for="signinRole">I am a</label>
-            <select id="signinRole" required>
-              <option value="" disabled selected>Select your role</option>
-              <option value="admin">Administrator</option>
-              <option value="consultant">Consultant</option>
-              <option value="client">Client</option>
-            </select>
           </div>
 
           <div class="form-options">
@@ -435,9 +540,9 @@
         <div class="auth-divider">or continue with</div>
 
         <div class="auth-social">
-          <button class="auth-social-btn">Google</button>
-          <button class="auth-social-btn">Microsoft</button>
-          <button class="auth-social-btn">LinkedIn</button>
+          <button class="auth-social-btn" data-brand="google" onclick="window.location.href='404.html'">Google</button>
+          <button class="auth-social-btn" data-brand="microsoft" onclick="window.location.href='404.html'">Microsoft</button>
+          <button class="auth-social-btn" data-brand="linkedin" onclick="window.location.href='404.html'">LinkedIn</button>
         </div>
 
         <div class="auth-form-footer">
@@ -448,80 +553,122 @@
   </div>
 
   <script>
-    // Pre-fill email and role if user just signed up
-    const storedUser = localStorage.getItem('stackly_user');
-    if (storedUser) {
-      try {
-        const user = JSON.parse(storedUser);
-        if (user.email) {
-          document.getElementById('email').value = user.email;
-        }
-        if (user.role) {
-          document.getElementById('signinRole').value = user.role;
-        }
-      } catch(e) {}
-    }
-
-    document.getElementById('signinForm')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById('email')?.value.trim();
-      const password = document.getElementById('password')?.value.trim();
-      const role = document.getElementById('signinRole')?.value;
-      const btn = document.getElementById('signinBtn');
-      const errorMsg = document.getElementById('signinError');
-
-      if (!email || !password || !role) {
-        btn.style.animation = 'shake 0.5s ease';
-        setTimeout(() => { btn.style.animation = ''; }, 500);
-        return;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pre-fill email and role if user just signed up
+      var storedUser = localStorage.getItem('stackly_user');
+      if (storedUser) {
+        try {
+          var user = JSON.parse(storedUser);
+          if (user.email) document.getElementById('email').value = user.email;
+          if (user.role) document.getElementById('signinRole').value = user.role;
+        } catch(e) {}
       }
 
-      btn.innerHTML = 'Signing In...';
-      btn.disabled = true;
+      var form = document.getElementById('signinForm');
+      if (!form) return;
 
-      setTimeout(() => {
-        const stored = localStorage.getItem('stackly_user');
-        if (stored) {
-          try {
-            const user = JSON.parse(stored);
-            if (email === user.email && password === user.password && role === user.role) {
-              const dashboards = {
-                admin: 'admin-dashboard.html',
-                consultant: 'consultant-dashboard.html',
-                client: 'client-dashboard.html'
-              };
-              window.location.href = dashboards[role] || 'admin-dashboard.html';
-              return;
-            }
-          } catch(e) {}
+      var fields = [
+        { id: 'email', label: 'Email address', placeholder: 'email address', required: true, type: 'email' },
+        { id: 'password', label: 'Password', placeholder: 'password', required: true },
+        { id: 'signinRole', label: 'Role', placeholder: 'role', required: true, isSelect: true }
+      ];
+
+      fields.forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return;
+        var group = el.closest('.form-group');
+        if (!group) return;
+        var err = document.createElement('div');
+        err.className = 'error-message';
+        err.id = f.id + '-error';
+        group.appendChild(err);
+      });
+
+      function validate(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return true;
+        var val = (el.value || '').trim();
+        var err = document.getElementById(f.id + '-error');
+        var group = el.closest('.form-group');
+        if (!group || !err) return true;
+
+        var msg = '';
+        if (f.required && !val) {
+          msg = 'Please enter your ' + f.placeholder;
+        } else if (f.isSelect && (!val || val === '')) {
+          msg = 'Please select your ' + f.placeholder;
+        } else if (f.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+          msg = 'Please enter a valid email address (e.g. name@company.com)';
         }
 
-        // Invalid credentials
-        btn.innerHTML = 'Sign In &rarr;';
-        btn.disabled = false;
-        if (errorMsg) {
-          errorMsg.textContent = 'Invalid email, password, or role. Please try again.';
-          errorMsg.style.display = 'block';
+        if (msg) {
+          group.classList.add('error');
+          group.classList.remove('success');
+          err.textContent = msg;
+          return false;
+        } else if (val) {
+          group.classList.remove('error');
+          group.classList.add('success');
+          err.textContent = '';
+          return true;
+        } else {
+          group.classList.remove('error', 'success');
+          err.textContent = '';
+          return true;
         }
-        btn.style.animation = 'shake 0.5s ease';
-        setTimeout(() => { btn.style.animation = ''; }, 500);
-      }, 1000);
+      }
+
+      fields.forEach(function(f) {
+        var el = document.getElementById(f.id);
+        if (!el) return;
+        el.addEventListener('input', function() { validate(f); });
+        el.addEventListener('blur', function() { validate(f); });
+      });
+
+      var errorMsg = document.getElementById('signinError');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var valid = true;
+        fields.forEach(function(f) { if (!validate(f)) valid = false; });
+
+        if (!valid) {
+          var firstErr = form.querySelector('.form-group.error input, .form-group.error select');
+          if (firstErr) firstErr.focus();
+          return;
+        }
+
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var role = document.getElementById('signinRole').value;
+        var btn = document.getElementById('signinBtn');
+
+        btn.innerHTML = 'Signing In...';
+        btn.disabled = true;
+        if (errorMsg) errorMsg.style.display = 'none';
+
+        setTimeout(function() {
+          var stored = localStorage.getItem('stackly_user');
+          if (stored) {
+            try {
+              var user = JSON.parse(stored);
+              if (email === user.email && password === user.password && role === user.role) {
+                var dashboards = { admin: 'admin-dashboard.html', consultant: 'consultant-dashboard.html', client: 'client-dashboard.html' };
+                window.location.href = dashboards[role] || 'admin-dashboard.html';
+                return;
+              }
+            } catch(e) {}
+          }
+
+          btn.innerHTML = 'Sign In &rarr;';
+          btn.disabled = false;
+          if (errorMsg) {
+            errorMsg.textContent = 'Invalid email, password, or role. Please try again.';
+            errorMsg.style.display = 'block';
+          }
+        }, 1000);
+      });
     });
-
-    // Inject shake keyframes if not present
-    if (!document.getElementById('shake-style')) {
-      const style = document.createElement('style');
-      style.id = 'shake-style';
-      style.textContent = `
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-          20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-      `;
-      document.head.appendChild(style);
-    }
   </script>
 
 </body>
